@@ -35,7 +35,11 @@ message ReceiveMessageRequest {
 }
 
 service ChatServer {
+ 	// simple unary call
     rpc Login(LoginRequest) returns (LoginResponse);
     rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+    // server streaming call
     rpc ReceiveMessage(ReceiveMessageRequest) returns (stream Message);
+    // bidirectional streaming
+    rpc chat(stream SendMessageRequest) returns (stream Message);
 }

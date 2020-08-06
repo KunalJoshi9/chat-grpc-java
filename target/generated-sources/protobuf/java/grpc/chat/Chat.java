@@ -61,11 +61,12 @@ public final class Chat {
       "\016\n\006status\030\001 \001(\t\022\n\n\002to\030\002 \001(\t\"8\n\007Message\022\n" +
       "\n\002to\030\001 \001(\t\022\014\n\004from\030\002 \001(\t\022\023\n\013messageText\030" +
       "\003 \001(\t\"&\n\025ReceiveMessageRequest\022\r\n\005token\030" +
-      "\001 \001(\t2\244\001\n\nChatServer\022&\n\005Login\022\r.LoginReq" +
+      "\001 \001(\t2\317\001\n\nChatServer\022&\n\005Login\022\r.LoginReq" +
       "uest\032\016.LoginResponse\0228\n\013SendMessage\022\023.Se" +
       "ndMessageRequest\032\024.SendMessageResponse\0224" +
       "\n\016ReceiveMessage\022\026.ReceiveMessageRequest" +
-      "\032\010.Message0\001B\r\n\tgrpc.chatP\001b\006proto3"
+      "\032\010.Message0\001\022)\n\004chat\022\023.SendMessageReques" +
+      "t\032\010.Message(\0010\001B\r\n\tgrpc.chatP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

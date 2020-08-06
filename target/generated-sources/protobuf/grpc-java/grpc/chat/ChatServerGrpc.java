@@ -120,6 +120,37 @@ public final class ChatServerGrpc {
     return getReceiveMessageMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.chat.SendMessageRequest,
+      grpc.chat.Message> getChatMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "chat",
+      requestType = grpc.chat.SendMessageRequest.class,
+      responseType = grpc.chat.Message.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<grpc.chat.SendMessageRequest,
+      grpc.chat.Message> getChatMethod() {
+    io.grpc.MethodDescriptor<grpc.chat.SendMessageRequest, grpc.chat.Message> getChatMethod;
+    if ((getChatMethod = ChatServerGrpc.getChatMethod) == null) {
+      synchronized (ChatServerGrpc.class) {
+        if ((getChatMethod = ChatServerGrpc.getChatMethod) == null) {
+          ChatServerGrpc.getChatMethod = getChatMethod =
+              io.grpc.MethodDescriptor.<grpc.chat.SendMessageRequest, grpc.chat.Message>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "chat"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.chat.SendMessageRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.chat.Message.getDefaultInstance()))
+              .setSchemaDescriptor(new ChatServerMethodDescriptorSupplier("chat"))
+              .build();
+        }
+      }
+    }
+    return getChatMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -169,6 +200,9 @@ public final class ChatServerGrpc {
   public static abstract class ChatServerImplBase implements io.grpc.BindableService {
 
     /**
+     * <pre>
+     * simple unary call
+     * </pre>
      */
     public void login(grpc.chat.LoginRequest request,
         io.grpc.stub.StreamObserver<grpc.chat.LoginResponse> responseObserver) {
@@ -183,10 +217,23 @@ public final class ChatServerGrpc {
     }
 
     /**
+     * <pre>
+     * server streaming call
+     * </pre>
      */
     public void receiveMessage(grpc.chat.ReceiveMessageRequest request,
         io.grpc.stub.StreamObserver<grpc.chat.Message> responseObserver) {
       asyncUnimplementedUnaryCall(getReceiveMessageMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * bidirectional streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<grpc.chat.SendMessageRequest> chat(
+        io.grpc.stub.StreamObserver<grpc.chat.Message> responseObserver) {
+      return asyncUnimplementedStreamingCall(getChatMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -212,6 +259,13 @@ public final class ChatServerGrpc {
                 grpc.chat.ReceiveMessageRequest,
                 grpc.chat.Message>(
                   this, METHODID_RECEIVE_MESSAGE)))
+          .addMethod(
+            getChatMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                grpc.chat.SendMessageRequest,
+                grpc.chat.Message>(
+                  this, METHODID_CHAT)))
           .build();
     }
   }
@@ -231,6 +285,9 @@ public final class ChatServerGrpc {
     }
 
     /**
+     * <pre>
+     * simple unary call
+     * </pre>
      */
     public void login(grpc.chat.LoginRequest request,
         io.grpc.stub.StreamObserver<grpc.chat.LoginResponse> responseObserver) {
@@ -247,11 +304,25 @@ public final class ChatServerGrpc {
     }
 
     /**
+     * <pre>
+     * server streaming call
+     * </pre>
      */
     public void receiveMessage(grpc.chat.ReceiveMessageRequest request,
         io.grpc.stub.StreamObserver<grpc.chat.Message> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getReceiveMessageMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * bidirectional streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<grpc.chat.SendMessageRequest> chat(
+        io.grpc.stub.StreamObserver<grpc.chat.Message> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getChatMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -270,6 +341,9 @@ public final class ChatServerGrpc {
     }
 
     /**
+     * <pre>
+     * simple unary call
+     * </pre>
      */
     public grpc.chat.LoginResponse login(grpc.chat.LoginRequest request) {
       return blockingUnaryCall(
@@ -284,6 +358,9 @@ public final class ChatServerGrpc {
     }
 
     /**
+     * <pre>
+     * server streaming call
+     * </pre>
      */
     public java.util.Iterator<grpc.chat.Message> receiveMessage(
         grpc.chat.ReceiveMessageRequest request) {
@@ -307,6 +384,9 @@ public final class ChatServerGrpc {
     }
 
     /**
+     * <pre>
+     * simple unary call
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<grpc.chat.LoginResponse> login(
         grpc.chat.LoginRequest request) {
@@ -326,6 +406,7 @@ public final class ChatServerGrpc {
   private static final int METHODID_LOGIN = 0;
   private static final int METHODID_SEND_MESSAGE = 1;
   private static final int METHODID_RECEIVE_MESSAGE = 2;
+  private static final int METHODID_CHAT = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -366,6 +447,9 @@ public final class ChatServerGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_CHAT:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.chat(
+              (io.grpc.stub.StreamObserver<grpc.chat.Message>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -420,6 +504,7 @@ public final class ChatServerGrpc {
               .addMethod(getLoginMethod())
               .addMethod(getSendMessageMethod())
               .addMethod(getReceiveMessageMethod())
+              .addMethod(getChatMethod())
               .build();
         }
       }
