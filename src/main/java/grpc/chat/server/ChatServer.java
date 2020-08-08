@@ -53,7 +53,7 @@ public class ChatServer {
     }
 
     public static void main(String[] args) throws Exception {
-        ChatServer server = new ChatServer(8980);
+        ChatServer server = new ChatServer(9090);
         server.start();
         server.blockUntilShutdown();
     }

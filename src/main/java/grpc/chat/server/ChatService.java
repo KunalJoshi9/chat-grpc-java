@@ -1,5 +1,10 @@
 package grpc.chat.server;
 
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import grpc.chat.ChatServerGrpc.ChatServerImplBase;
 import grpc.chat.LoginRequest;
 import grpc.chat.LoginResponse;
@@ -8,13 +13,9 @@ import grpc.chat.ReceiveMessageRequest;
 import grpc.chat.SendMessageRequest;
 import grpc.chat.SendMessageResponse;
 import io.grpc.stub.StreamObserver;
+import net.devh.boot.grpc.server.service.GrpcService;
 
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
+@GrpcService	
 public class ChatService extends ChatServerImplBase {
     private static final Logger logger = Logger.getLogger(ChatService.class.getName());
 
