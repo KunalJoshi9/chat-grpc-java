@@ -17,6 +17,7 @@ grpc\chat\LoginResponse.class
 grpc\chat\server\ChatService$1.class
 grpc\chat\ChatServerGrpc$ChatServerImplBase.class
 grpc\chat\SendMessageResponseOrBuilder.class
+rest\chat\controller\DelegateController.class
 grpc\chat\Message.class
 grpc\chat\SendMessageRequest$Builder.class
 grpc\chat\LoginRequest$1.class
@@ -26,12 +27,14 @@ grpc\chat\ChatServerGrpc$1.class
 grpc\chat\MessageOrBuilder.class
 grpc\chat\server\ChatServer.class
 grpc\chat\ChatServerGrpc$MethodHandlers.class
+rest\chat\ChatApplication.class
 grpc\chat\LoginResponse$Builder.class
 grpc\chat\ReceiveMessageRequest$1.class
 grpc\chat\ChatServerGrpc$ChatServerFileDescriptorSupplier.class
 grpc\chat\SendMessageRequest$1.class
 grpc\chat\SendMessageResponse$Builder.class
 grpc\chat\server\ChatServer$1.class
+rest\chat\message\LoginResponseREST.class
 grpc\chat\LoginRequestOrBuilder.class
 grpc\chat\ReceiveMessageRequest.class
 grpc\chat\ChatServerGrpc$2.class
